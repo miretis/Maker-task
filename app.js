@@ -11,16 +11,20 @@ const dbFile = './posts.db';
 let db;
 
 async function initDatabase() {
-    const exists = fs.existsSync(dbFile);
-    db = await dbWrapper.open({ filename: dbFile, driver: sqlite3.Database });
-    if (!exists) {
-        await db.run(`CREATE TABLE posts (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user TEXT,
-            content TEXT
-        );`);
-        console.log('База даних та таблиця "posts" створені.');
+    // Видаляємо файл бази, щоб таблиця створювалась заново при кожному запуску
+    if (fs.existsSync(dbFile)) {
+        console.log('Видаляємо існуючий файл бази даних для чистої ініціалізації...');
+        fs.unlinkSync(dbFile);
     }
+
+    db = await dbWrapper.open({ filename: dbFile, driver: sqlite3.Database });
+    console.log('Підключились до бази, створюємо таблицю posts...');
+    await db.run(`CREATE TABLE posts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user TEXT,
+        content TEXT
+    );`);
+    console.log('Таблиця posts створена.');
 }
 
 async function getPosts() {
@@ -67,7 +71,7 @@ async function handleAddPost(req, res) {
         res.writeHead(302, { Location: '/' });
         res.end();
     } catch (err) {
-        console.error(err);
+        console.error('Помилка додавання поста:', err);
         res.writeHead(500);
         res.end('Помилка додавання даних');
     }
@@ -81,7 +85,7 @@ async function handleDeletePost(req, res) {
         res.writeHead(302, { Location: '/' });
         res.end();
     } catch (err) {
-        console.error(err);
+        console.error('Помилка видалення поста:', err);
         res.writeHead(500);
         res.end('Помилка видалення');
     }
