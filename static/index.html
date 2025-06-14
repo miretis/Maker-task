@@ -1,26 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Додаток піци</title>
-    <style>
-        body { font-family: sans-serif; margin: 20px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ddd; padding: 10px; }
-        input, select, button { margin: 5px 0; padding: 8px; }
-    </style>
     <meta charset="UTF-8">
+    <title>Mini Blog</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Додати пост</h1>
-    <form action="/add" method="POST">
-        <input type="text" name="user" placeholder="User" required><br>
-        <input type="text" name="content" placeholder="Start typing..." required><br>
-        <button type="submit">Додати</button>
-    </form>
+    <div class="container">
 
-    <h2>Список постів</h2>
-    <table>
-        
-    </table>
+        <!-- Кнопка открыть модалку -->
+        <button id="openModalBtn" class="open-modal-btn">+</button>
+
+        <!-- Модалка для добавления поста -->
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+                <span id="closeModalBtn" class="close">&times;</span>
+                <h2>Добавить пост</h2>
+                <form action="/add" method="POST">
+                    <label for="user">User:</label>
+                    <input type="text" id="user" name="user" required>
+
+                    <label for="content">Post:</label>
+                    <textarea id="content" name="content" required></textarea>
+
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Список постов -->
+        <div class="posts-section">
+            <h1>Posts</h1>
+            <table class="posts-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Post</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{tableRows}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Простая логика открытия/закрытия модалки
+        const modal = document.getElementById("modal");
+        const openModalBtn = document.getElementById("openModalBtn");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+
+        openModalBtn.onclick = () => modal.classList.remove("hidden");
+        closeModalBtn.onclick = () => modal.classList.add("hidden");
+        window.onclick = (event) => {
+            if (event.target == modal) {
+                modal.classList.add("hidden");
+            }
+        };
+    </script>
 </body>
 </html>
