@@ -82,26 +82,53 @@ input[type="text"], textarea {
     cursor: pointer;
 }
 
-/* Таблица постов */
+/* Посты */
+
 .posts-section {
     flex: 1;
 }
 
-.posts-table {
-    width: 100%;
-    border-collapse: collapse;
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.post-card {
+    position: relative;
     background-color: white;
+    border: 2px solid black;
+    padding: 20px;
     border-radius: 8px;
-    overflow: hidden;
+    min-height: 200px;
 }
 
-.posts-table th, .posts-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
+.post-header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    background-color: #f9f9f9;
+    font-weight: bold;
 }
 
-.posts-table th {
-    background-color: #007bff;
+.post-content {
+    margin-top: 40px;
+    font-size: 16px;
+}
+
+.delete-form {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.delete-btn {
+    border: 1px solid black;
+    padding: 5px 10px;
+    background-color: #ff4d4d;
     color: white;
+    border-radius: 4px;
+    cursor: pointer;
 }

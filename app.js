@@ -30,16 +30,14 @@ async function initDatabase() {
 async function getPosts() {
     const posts = await db.all('SELECT * FROM posts');
     return posts.map(p => `
-        <tr>
-            <td>${p.user}</td>
-            <td>${p.content}</td>
-            <td>
-                <form action="/delete" method="POST" style="display:inline;">
-                    <input type="hidden" name="id" value="${p.id}">
-                    <button type="submit">Видалити</button>
-                </form>
-            </td>
-        </tr>
+        <div class="post-card">
+            <div class="post-header">${p.user}</div>
+            <div class="post-content">${p.content}</div>
+            <form action="/delete" method="POST" class="delete-form">
+                <input type="hidden" name="id" value="${p.id}">
+                <button type="submit" class="delete-btn">Delete</button>
+            </form>
+        </div>
     `).join('');
 }
 

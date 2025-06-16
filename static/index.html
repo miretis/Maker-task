@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Mini Blog</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
 
-        <!-- Кнопка открыть модалку -->
         <button id="openModalBtn" class="open-modal-btn">+</button>
 
-        <!-- Модалка для добавления поста -->
         <div id="modal" class="modal hidden">
             <div class="modal-content">
                 <span id="closeModalBtn" class="close">&times;</span>
@@ -28,26 +26,15 @@
             </div>
         </div>
 
-        <!-- Список постов -->
         <div class="posts-section">
             <h1>Posts</h1>
-            <table class="posts-table">
-                <thead>
-                    <tr>
-                        <th>User</th>
-                        <th>Post</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{tableRows}}
-                </tbody>
-            </table>
+            <div class="posts-container">
+                {{tableRows}}
+            </div>
         </div>
     </div>
 
     <script>
-        // Простая логика открытия/закрытия модалки
         const modal = document.getElementById("modal");
         const openModalBtn = document.getElementById("openModalBtn");
         const closeModalBtn = document.getElementById("closeModalBtn");
