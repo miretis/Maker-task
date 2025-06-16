@@ -12,10 +12,10 @@ let db;
 
 async function initDatabase() {
     // Видаляємо файл бази, щоб таблиця створювалась заново при кожному запуску
-    if (fs.existsSync(dbFile)) {
+    /*if (fs.existsSync(dbFile)) {
         console.log('Видаляємо існуючий файл бази даних для чистої ініціалізації...');
         fs.unlinkSync(dbFile);
-    }
+    }*/
 
     db = await dbWrapper.open({ filename: dbFile, driver: sqlite3.Database });
     console.log('Підключились до бази, створюємо таблицю posts...');
