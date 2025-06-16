@@ -11,21 +11,21 @@ const dbFile = './posts.db';
 let db;
 
 async function initDatabase() {
-    db = await dbWrapper.open({ filename: dbFile, driver: sqlite3.Database });
-    console.log('Підключились до бази, створюємо таблицю posts...');
-    /*// Видаляємо файл бази, щоб таблиця створювалась заново при кожному запуску
+    
+    // Видаляємо файл бази, щоб таблиця створювалась заново при кожному запуску
     if (fs.existsSync(dbFile)) {
         console.log('Видаляємо існуючий файл бази даних для чистої ініціалізації...');
         fs.unlinkSync(dbFile);
     }
 
-    
+    db = await dbWrapper.open({ filename: dbFile, driver: sqlite3.Database });
+    console.log('Підключились до бази, створюємо таблицю posts...');
     await db.run(`CREATE TABLE posts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user TEXT,
         content TEXT
     );`);
-    console.log('Таблиця posts створена.');*/
+    console.log('Таблиця posts створена.');
 }
 
 async function getPosts() {
