@@ -11,22 +11,23 @@ const dbFile = './posts.db';
 let db;
 
 async function initDatabase() {
-    
-    // Видаляємо файл бази, щоб таблиця створювалась заново при кожному запуску
-    if (fs.existsSync(dbFile)) {
-        console.log('Видаляємо існуючий файл бази даних для чистої ініціалізації...');
-        fs.unlinkSync(dbFile);
-    }
+    const dbExists = fs.existsSync(dbFile);
 
     db = await dbWrapper.open({ filename: dbFile, driver: sqlite3.Database });
-    console.log('Підключились до бази, створюємо таблицю posts...');
-    await db.run(`CREATE TABLE posts (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user TEXT,
-        content TEXT
-    );`);
-    console.log('Таблиця posts створена.');
+
+    if (!dbExists) {
+        console.log('База не найдена — создаем новую базу и таблицу posts...');
+        await db.run(`CREATE TABLE posts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user TEXT,
+            content TEXT
+        );`);
+        console.log('Таблица posts создана.');
+    } else {
+        console.log('База уже существует — используем существующую.');
+    }
 }
+
 
 async function getPosts() {
     const posts = await db.all('SELECT * FROM posts');
