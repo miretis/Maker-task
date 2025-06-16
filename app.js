@@ -30,7 +30,7 @@ async function initDatabase() {
 
 
 async function getPosts() {
-    const posts = await db.all('SELECT * FROM posts');
+    const posts = await db.all('SELECT * FROM posts ORDER BY id DESC');
     return posts.map(p => `
         <div class="post-card">
             <div class="post-header">${p.user}</div>
