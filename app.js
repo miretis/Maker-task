@@ -34,7 +34,7 @@ async function getPosts() {
     return posts.map(p => `
         <div class="post-card">
             <div class="post-header">${p.user}</div>
-            <div class="post-content">${p.content}</div>
+            <div class="post-content"><pre>${p.content}</pre></div>
             <form action="/delete" method="POST" class="delete-form">
                 <input type="hidden" name="id" value="${p.id}">
                 <button type="submit" class="delete-btn">Delete</button>
