@@ -9,8 +9,13 @@
 <body>
     <div class="container">
 
-        <button id="openModalBtn" class="open-modal-btn">+</button>
+        <!-- Закрепленная верхняя панель -->
+        <div class="header-bar">
+            <button id="openModalBtn" class="open-modal-btn">+</button>
+            <h1>Posts</h1>
+        </div>
 
+        <!-- Модальное окно -->
         <div id="modal" class="modal hidden">
             <div class="modal-content">
                 <span id="closeModalBtn" class="close">&times;</span>
@@ -27,8 +32,8 @@
             </div>
         </div>
 
+        <!-- Секция постов -->
         <div class="posts-section">
-            <h1>Posts</h1>
             <div class="posts-container">
                 {{tableRows}}
             </div>
@@ -50,7 +55,3 @@
     </script>
 </body>
 </html>
-
-
-
-

@@ -7,12 +7,24 @@ body {
 
 .container {
     display: flex;
+    flex-direction: column;
     min-height: 100vh;
-    padding: 20px 50px 20px 20px;
-    gap: 20px;
 }
 
-/* Модалка */
+/* Закреплённый верх — заголовок + кнопка */
+.header-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #fcd8f5;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 2px solid #daafb6;
+}
+
+/* Кнопка "+" */
 .open-modal-btn {
     font-size: 32px;
     padding: 10px 20px;
@@ -23,11 +35,13 @@ body {
     cursor: pointer;
     height: 60px;
     width: 60px;
+    border: 2px solid #7c8ba3;
 }
 
+/* Модалка */
 .modal {
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -70,6 +84,7 @@ input[type="text"], textarea {
     margin-top: 5px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    font-family: 'Victor Mono', monospace;
 }
 
 .submit-btn {
@@ -85,6 +100,7 @@ input[type="text"], textarea {
 /* Посты */
 
 .posts-section {
+    padding: 20px 50px 20px 20px;
     flex: 1;
 }
 
@@ -95,20 +111,23 @@ input[type="text"], textarea {
 }
 
 .post-card {
+    display: flow-root;
     position: relative;
     background-color: #fcfeff;
     border: 2px solid #ddbabf;
     padding: 20px 20px 50px 20px;
-    border-radius: 8px;
-    min-height: 100px;
+    border-radius: 25px;
+    min-height: 50px;
     font-size: 20px;
+    white-space: pre-wrap; /* Сохраняем табуляции и переносы строк */
+    overflow-wrap: break-word;
 }
 
 .post-header {
     position: absolute;
     top: 10px;
     left: 10px;
-    border: 1px solid #ddbabf;
+    border: 1px solid #ced5ff;
     border-radius: 15px;
     padding: 5px 10px;
     background-color: #dee2ff77;
@@ -117,8 +136,9 @@ input[type="text"], textarea {
 }
 
 .post-content {
-    margin-top: 40px;
+    margin-top: 20px;
     font-size: 16px;
+    white-space: pre-wrap;
 }
 
 .delete-form {
@@ -129,7 +149,7 @@ input[type="text"], textarea {
 
 .delete-btn {
     font-size: 15px;
-    border: 1px solid black;
+    border: 2px solid #b6a6c1;
     padding: 5px 10px;
     background-color: #CBC0D3;
     color: white;
